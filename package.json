@@ -4,7 +4,7 @@
   "description": "server for rubbib, database thingy",
   "main": "server.js",
   "scripts": {
-    "srv": "nodemon server.js"
+    "dev": "nodemon server.js"
   },
   "engines": {
     "node": "^7.6"
