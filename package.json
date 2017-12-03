@@ -1,0 +1,23 @@
+{
+  "name": "rubbibsrv",
+  "version": "1.0.0",
+  "description": "server for rubbib, database thingy",
+  "main": "server.js",
+  "scripts": {
+    "srv": "nodemon server.js"
+  },
+  "engines": {
+    "node": "^7.6"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "4.0.0",
+    "express": "4.16.2",
+    "mongodb": "2.2.33",
+    "mongoose": "4.13.2"
+  },
+  "devDependencies": {
+    "nodemon": "1.12.1"
+  }
+}
