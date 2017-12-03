@@ -31,10 +31,10 @@ app.get('/runners/:tStamp', function (req, res) {
   }).exec(function (err, result) {
     for (var i in result) {
       ret.push({
-        tagId: result[i].tagId*1,
-        bibNo: result[i].bib_number*1,
+        tagId: result[i].tagId * 1,
+        bibNo: result[i].bib_number * 1,
         bibName: result[i].name_on_bib,
-        name: result[i].first_name+' '+result[i].last_name,
+        name: result[i].first_name + ' ' + result[i].last_name,
         tStamp: result[i].tStamp
       })
     }
