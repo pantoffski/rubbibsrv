@@ -22,6 +22,7 @@ app.get('/runners/:tStamp', function (req, res) {
     name_on_bib: 1,
     first_name: 1,
     last_name: 1,
+    raceCat: 1,
     tStamp: 1
   }).sort({
     tStamp: -1
@@ -32,6 +33,7 @@ app.get('/runners/:tStamp', function (req, res) {
         bibNo: result[i].bib_number * 1,
         bibName: result[i].name_on_bib,
         name: result[i].first_name + ' ' + result[i].last_name,
+        raceCat: result[i].raceCat,
         tStamp: result[i].tStamp
       })
     }
