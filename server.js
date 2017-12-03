@@ -2,9 +2,6 @@ require('dotenv').config();
 //server
 const express = require('express');
 const app = express();
-app.listen((process.env.PORT || 5000), function () {
-  console.log('listening to ' + process.env.PORT);
-});
 app.all('/', function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -38,8 +35,13 @@ app.get('/runners/:tStamp', function (req, res) {
         tStamp: result[i].tStamp
       })
     }
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.send(ret);
   })
+});
+app.listen((process.env.PORT || 5000), function () {
+  console.log('listening to ' + process.env.PORT);
 });
 //mongo
 var mongoose = require('mongoose');
