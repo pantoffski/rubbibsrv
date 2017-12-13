@@ -7,6 +7,18 @@ app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
+app.get('/resetUpdatedAt', function (req, res) {
+  var mongo = require('mongodb');
+  var MongoClient = mongo.MongoClient;
+  MongoClient.connect(process.env.ONG_MONGODB_URI, (err, db) => {
+    if (err) {
+      res.send('db error');
+      return false;
+    }
+    res.send('db ok');
+    db.collection('runners').updateMany({},{$set:{updatedAt:new Date().getTime()}});
+  });
+});
 app.get('/runners/:updatedAt', function (req, res) {
   //console.log('here');
   var ret = [];
@@ -46,7 +58,7 @@ app.get('/runners/:updatedAt', function (req, res) {
 app.listen((process.env.PORT || 5000), function () {
   console.log('listening to ' + process.env.PORT);
 });
-//mongo
+//mongoose
 var mongoose = require('mongoose');
 mongoose.connect(process.env.ONG_MONGODB_URI, {
   useMongoClient: true
@@ -61,12 +73,10 @@ var runnersSchema = new mongoose.Schema({
     index: true
   },
   first_name: {
-    type: String,
-    index: true
+    type: String
   },
   last_name: {
-    type: String,
-    index: true
+    type: String
   },
   tagId: {
     type: String,
