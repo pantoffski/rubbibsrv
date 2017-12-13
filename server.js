@@ -7,14 +7,14 @@ app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
-app.get('/runners/:tStamp', function (req, res) {
+app.get('/runners/:updateAt', function (req, res) {
   var ret = [];
   runners.find({
     tagId: {
       $nin: ['', null]
     },
-    tStamp: {
-      $gte: req.params.tStamp
+    updateAt: {
+      $gte: req.params.updateAt
     }
   }).select({
     tagId: 1,
@@ -23,9 +23,9 @@ app.get('/runners/:tStamp', function (req, res) {
     first_name: 1,
     last_name: 1,
     raceCat: 1,
-    tStamp: 1
+    updateAt: 1
   }).sort({
-    tStamp: -1
+    updateAt: -1
   }).exec(function (err, result) {
     for (var i in result) {
       ret.push({
@@ -34,7 +34,7 @@ app.get('/runners/:tStamp', function (req, res) {
         bibName: result[i].name_on_bib,
         name: result[i].first_name + ' ' + result[i].last_name,
         raceCat: result[i].raceCat,
-        tStamp: result[i].tStamp
+        updateAt: result[i].updateAt
       })
     }
     // res.header("Access-Control-Allow-Origin", "*");
@@ -56,7 +56,7 @@ var runnersSchema = new mongoose.Schema({
     type: String
   },
   bib_number: {
-    type: String,
+    type: Number,
     index: true
   },
   first_name: {
@@ -77,7 +77,7 @@ var runnersSchema = new mongoose.Schema({
   raceCat: {
     type: String
   },
-  tStamp: {
+  updateAt: {
     type: Number,
     index: true
   }
